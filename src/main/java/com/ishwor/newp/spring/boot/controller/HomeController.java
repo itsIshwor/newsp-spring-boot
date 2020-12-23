@@ -18,6 +18,7 @@ public class HomeController implements ErrorController {
 	@ModelAttribute("listAll")
 	public String home(Model model) {
 		model.addAttribute("title", "welCome | newsP");
+		
 		return "index";
 	}
 
