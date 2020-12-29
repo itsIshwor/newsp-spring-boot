@@ -16,12 +16,12 @@ navbar-dark bg-dark">
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Categories
+         Browse By Categories
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu bg-dark text-white" aria-labelledby="navbarDropdown">
          	<c:forEach var="cat" items="${listAll}">
-				<div class="text-center">
-					<a href="#" class="nav-llink">${cat.categoriesName}</a>
+				<div class="text-center my-1">
+					<a href="#" class="nav-llink py-2" >${cat.categoriesName}</a>
 				</div>
 			</c:forEach>
         </div>

@@ -3,22 +3,26 @@ package com.ishwor.newp.spring.boot.controller;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ishwor.newp.spring.boot.comon.util.GlobalCategoriesModule;
 
 @Controller
 public class HomeController implements ErrorController {
-
+	@Autowired
+	GlobalCategoriesModule globalCategoriesModuleob;
+	
+	
 	@GetMapping("/")
-	@ModelAttribute("listAll")
 	public String home(Model model) {
 		model.addAttribute("title", "welCome | newsP");
-		
+		model.addAttribute("listAll", globalCategoriesModuleob.listAllCategories());
 		return "index";
 	}
 

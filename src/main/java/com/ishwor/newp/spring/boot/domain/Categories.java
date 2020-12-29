@@ -2,11 +2,13 @@ package com.ishwor.newp.spring.boot.domain;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -17,55 +19,57 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Entity
 @NamedQuery(name = "findAllCategories", query = "Select c from Categories c")
 public class Categories {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	short cId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer cId;
 
-	@NotNull(message = "Categories name cant be null")
-	@NotEmpty(message = "Categories name cant empty")
-	// @UniqueElements(message="Categories name must beUnique")
-	@NotBlank(message = "Categories name cant be blank")
-	private String categoriesName;
+    @NotNull(message = "Categories name cant be null")
+    @NotEmpty(message = "Categories name cant empty")
+    @NotBlank(message = "Categories name cant be blank")
+    private String categoriesName;
 
-	@UpdateTimestamp
-	private LocalDateTime lastUpdatedDate;
+    @UpdateTimestamp
+    private LocalDateTime lastUpdatedDate;
 
-	@CreationTimestamp
-	private LocalDateTime createdDate;
+    @CreationTimestamp
+    private LocalDateTime createdDate;
 
-	public LocalDateTime getLastUpdatedDate() {
-		return lastUpdatedDate;
-	}
+    public LocalDateTime getLastUpdatedDate() {
+        return lastUpdatedDate;
+    }
 
-	public LocalDateTime getCreatedDate() {
-		return createdDate;
-	}
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
 
-	public Categories() {
+    public Categories() {
 
-	}
+    }
 
-	public Categories(String categoriesName) {
-		super();
-		this.categoriesName = categoriesName;
-	}
+    public Categories(String categoriesName) {
+        this.categoriesName = categoriesName;
+    }
 
-	public String getCategoriesName() {
-		return categoriesName;
-	}
+    public String getCategoriesName() {
+        return categoriesName;
+    }
 
-	public void setCategoriesName(String categoriesName) {
-		this.categoriesName = categoriesName;
-	}
+    public void setCategoriesName(String categoriesName) {
+        this.categoriesName = categoriesName;
+    }
 
-	public short getcId() {
-		return cId;
-	}
+    public Integer getcId() {
+        return cId;
+    }
 
-	@Override
-	public String toString() {
-		return "Categories [cId=" + cId + ", categoriesName=" + categoriesName + ", lastUpdatedDate=" + lastUpdatedDate
-				+ ", createdDate=" + createdDate + "]";
-	}
+    public void setcId(Integer cId) {
+        this.cId = cId;
+    }
+
+    @Override
+    public String toString() {
+        return "Categories [cId=" + cId + ", categoriesName=" + categoriesName + ", lastUpdatedDate=" + lastUpdatedDate
+                + ", createdDate=" + createdDate + "]";
+    }
 
 }
