@@ -2,7 +2,6 @@ package com.ishwor.newp.spring.boot.domain;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +26,9 @@ public class Categories {
     @NotEmpty(message = "Categories name cant empty")
     @NotBlank(message = "Categories name cant be blank")
     private String categoriesName;
+    
+    @OneToOne(mappedBy = "categories")
+    private News news;
 
     @UpdateTimestamp
     private LocalDateTime lastUpdatedDate;
