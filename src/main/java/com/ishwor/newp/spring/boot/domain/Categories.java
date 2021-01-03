@@ -7,11 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
+import javax.validation.constraints.NotNull; 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -27,9 +25,7 @@ public class Categories {
     @NotBlank(message = "Categories name cant be blank")
     private String categoriesName;
     
-    @OneToOne(mappedBy = "categories")
-    private News news;
-
+   
     @UpdateTimestamp
     private LocalDateTime lastUpdatedDate;
 

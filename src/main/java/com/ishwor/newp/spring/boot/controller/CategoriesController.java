@@ -73,10 +73,8 @@ public class CategoriesController {
 	public String viewIndividual(@PathVariable("id") int id, Model model) {
 		model.addAttribute("title", "view -" + id);
 
-		Categories categories = categoriesServiceImpl.findBycategoriesId(id);
-		
 		model.addAttribute("listAll", globalCategoriesModuleob.listAllCategories());
-		model.addAttribute("categories", categories);
+		model.addAttribute("categories", categoriesServiceImpl.findBycategoriesId(id));
 		return "/categories/individual-categories";
 	}
 

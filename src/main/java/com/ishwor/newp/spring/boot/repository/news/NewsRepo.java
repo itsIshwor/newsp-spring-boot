@@ -12,4 +12,6 @@ public interface NewsRepo {
 	public News findByNewsId(Integer id);
 	
 	public List<News> findAllNews();
+	
+	public List<News> findAllNewsDesc();
 }

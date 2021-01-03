@@ -23,7 +23,8 @@ public class NewsRepoImpl implements NewsRepo {
 
 		if (news.getId() == null)
 			session.save(news);
-		session.update(news);
+		else
+			session.update(news);
 
 	}
 
@@ -46,7 +47,15 @@ public class NewsRepoImpl implements NewsRepo {
 	@Override
 	public List<News> findAllNews() {
 		Session session = entityManager.unwrap(Session.class);
-		return session.getNamedNativeQuery("findAllNews").getResultList();
+		return session.getNamedQuery("findAllNews").getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<News> findAllNewsDesc() {
+		Session session = entityManager.unwrap(Session.class);
+		return session.getNamedQuery("findAllNewsDesc").getResultList();
+	
 	}
 
 }

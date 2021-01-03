@@ -1,13 +1,16 @@
-<!-- to do add spring mvc form tag -->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <title>${title}</title>
 <jsp:include page="../includes/header.jsp"></jsp:include>
-<h2 class="text-center">Create New News</h2>
+	<h2 class="text-center text-underline px-2">Update  News: ${news.id}: ${news.title}</h2>
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 mx-auto  p-2 m-2">
 			<form:form method="post" action="/news/save" modelAttribute="news">
+				<div class="form-group">
+					<label>News Id</label>
+					<form:input path="id" readonly="true" class="form-control"/>
+				</div>
 				<div class="form-group">
 					<label for="title">NewsTitle</label>
 					<form:input id="title" path="title" class="form-control"

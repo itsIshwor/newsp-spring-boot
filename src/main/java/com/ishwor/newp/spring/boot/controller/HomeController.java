@@ -12,22 +12,30 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ishwor.newp.spring.boot.comon.util.GlobalCategoriesModule;
+import com.ishwor.newp.spring.boot.service.news.NewsServiceImpl;
 
 @Controller
 public class HomeController implements ErrorController {
 	@Autowired
 	GlobalCategoriesModule globalCategoriesModuleob;
-	
-	
+
+	@Autowired
+	NewsServiceImpl newServiceImpl;
+
 	@GetMapping("/")
 	public String home(Model model) {
 		model.addAttribute("title", "welCome | newsP");
 		model.addAttribute("listAll", globalCategoriesModuleob.listAllCategories());
+		// get all news and all it to the view
+		model.addAttribute("allNews", newServiceImpl.findAllNewsDesc());
 		return "index";
 	}
+	
+	
+	
 
 	@RequestMapping("/error")
-	public String handleError(HttpServletRequest request,Model model) {
+	public String handleError(HttpServletRequest request, Model model) {
 		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
 		if (status != null) {
@@ -45,7 +53,7 @@ public class HomeController implements ErrorController {
 
 	@Override
 	public String getErrorPath() {
-		
+
 		return "error";
 	}
 }

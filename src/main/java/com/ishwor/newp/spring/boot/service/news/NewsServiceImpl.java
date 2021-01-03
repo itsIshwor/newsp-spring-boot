@@ -14,32 +14,38 @@ import com.ishwor.newp.spring.boot.repository.news.NewsRepoImpl;
 @Service
 @Transactional
 public class NewsServiceImpl implements NewsRepo {
-	
+
 	@Autowired
 	NewsRepoImpl newsRepoImpl;
 
 	@Override
 	public void saveNews(News news) {
 		newsRepoImpl.saveNews(news);
-		
+
 	}
 
 	@Override
 	public void deleteNews(Integer id) {
 		newsRepoImpl.deleteNews(id);
-		
+
 	}
 
 	@Override
 	public News findByNewsId(Integer id) {
 		return newsRepoImpl.findByNewsId(id);
-		
+
 	}
 
 	@Override
 	public List<News> findAllNews() {
-		
+
 		return newsRepoImpl.findAllNews();
+	}
+
+	@Override
+	public List<News> findAllNewsDesc() {
+
+		return newsRepoImpl.findAllNewsDesc();
 	}
 
 }
