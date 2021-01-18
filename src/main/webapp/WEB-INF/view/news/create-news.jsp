@@ -7,7 +7,8 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 mx-auto  p-2 m-2">
-			<form:form method="post" action="/news/save" modelAttribute="news">
+			<form:form method="post" action="/news/save" modelAttribute="news"
+				enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="title">NewsTitle</label>
 					<form:input id="title" path="title" class="form-control"
@@ -30,9 +31,10 @@
 				</div>
 
 				<div class="form-group">
-					<label id="">Photo</label> <input type="file">
+					<label for="file">Photo</label> <input type="file" name="file"
+						class="form-control" id="file" multiple />
 				</div>
-				
+
 				<input type="submit" class="btn btn-primary" value="Create New News">
 			</form:form>
 		</div>
