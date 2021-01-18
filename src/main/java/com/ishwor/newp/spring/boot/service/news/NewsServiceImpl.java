@@ -1,51 +1,66 @@
 package com.ishwor.newp.spring.boot.service.news;
 
-import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.ishwor.newp.spring.boot.comon.util.exception.DataNotFoundExeption;
 import com.ishwor.newp.spring.boot.domain.News;
 import com.ishwor.newp.spring.boot.repository.news.NewsRepo;
-import com.ishwor.newp.spring.boot.repository.news.NewsRepoImpl;
 
 @Service
 @Transactional
-public class NewsServiceImpl implements NewsRepo {
+public class NewsServiceImpl {
 
 	@Autowired
-	NewsRepoImpl newsRepoImpl;
+	NewsRepo newsRepo;
 
-	@Override
-	public void saveNews(News news) {
-		newsRepoImpl.saveNews(news);
+	public Page<News> findAllNews(Integer pageNo, Integer pageSize) {
+		Pageable paging = PageRequest.of(pageNo - 1, pageSize);
 
-	}
+		Page<News> listOfNewsInPage = newsRepo.findAll(paging);
 
-	@Override
-	public void deleteNews(Integer id) {
-		newsRepoImpl.deleteNews(id);
+		return listOfNewsInPage;
 
 	}
 
-	@Override
-	public News findByNewsId(Integer id) {
-		return newsRepoImpl.findByNewsId(id);
+	public News getNewsById(Integer id) throws DataNotFoundExeption {
+		Optional<News> oneNews = newsRepo.findById(id);
 
+		if (oneNews.isPresent())
+			return oneNews.get();
+		else
+			throw new DataNotFoundExeption("No news can find with given id::" + id);
 	}
 
-	@Override
-	public List<News> findAllNews() {
+	public void saveNews(News news) throws DataNotFoundExeption {
+		if (news.getId() == null)
+			newsRepo.save(news);
 
-		return newsRepoImpl.findAllNews();
+		Optional<News> isNewsPresent = newsRepo.findById(news.getId());
+		if (isNewsPresent.isPresent()) {
+			News newsToUpdate = isNewsPresent.get();
+			newsToUpdate.setCategories(news.getCategories());
+			newsToUpdate.setNewsBody(news.getNewsBody());
+			newsToUpdate.setTitle(news.getTitle());
+
+			newsToUpdate = newsRepo.save(newsToUpdate);
+
+		}
 	}
 
-	@Override
-	public List<News> findAllNewsDesc() {
+	public void deleteNews(Integer id) throws DataNotFoundExeption {
+		Optional<News> getNews = newsRepo.findById(id);
 
-		return newsRepoImpl.findAllNewsDesc();
+		if (getNews.isPresent())
+			newsRepo.deleteById(id);
+		else
+			throw new DataNotFoundExeption("No News with id " + id + " can found.");
 	}
-
 }

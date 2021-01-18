@@ -1,9 +1,9 @@
 package com.ishwor.newp.spring.boot.domain;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,13 +25,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @NamedQueries(value = { @NamedQuery(name = "findAllNews", query = "Select n from News n"),
-		@NamedQuery(name = "findAllNewsDesc", query = "Select n from News n order by id desc")
-})
+		@NamedQuery(name = "findAllNewsDesc", query = "Select n from News n order by id desc") })
 public class News {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer news_id;
 
 	@NotNull(message = "title can't be null")
 	@NotEmpty(message = "title can't be empty.")
@@ -39,10 +38,6 @@ public class News {
 
 	@Lob
 	private String newsBody;
-
-	// TODO add image columns
-	@Lob
-	private byte[] image;
 
 	@OneToOne(targetEntity = Categories.class, cascade = CascadeType.DETACH)
 	@JoinColumn(name = "categories_id", referencedColumnName = "cId")
@@ -52,7 +47,20 @@ public class News {
 	private LocalDateTime lastUpdatedDate;
 
 	@CreationTimestamp
+	@Column(updatable = false)
 	private LocalDateTime createdDate;
+
+	
+
+	public Integer getNews_id() {
+		return news_id;
+	}
+
+	public void setNews_id(Integer news_id) {
+		this.news_id = news_id;
+	}
+
+	
 
 	public News() {
 
@@ -99,29 +107,19 @@ public class News {
 	}
 
 	public Integer getId() {
-		return id;
-	}
-
-	public byte[] getImage() {
-		return image;
-	}
-
-	public void setImage(byte[] image) {
-		this.image = image;
+		return news_id;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.news_id = id;
 	}
 
 	public News(Integer id,
 			@NotNull(message = "title can't be null") @NotEmpty(message = "title can't be empty.") String title,
-			String newsBody, byte[] image, Categories categories, LocalDateTime lastUpdatedDate,
-			LocalDateTime createdDate) {
-		this.id = id;
+			String newsBody, Categories categories, LocalDateTime lastUpdatedDate, LocalDateTime createdDate) {
+		this.news_id = id;
 		this.title = title;
 		this.newsBody = newsBody;
-		this.image = image;
 		this.categories = categories;
 		this.lastUpdatedDate = lastUpdatedDate;
 		this.createdDate = createdDate;
@@ -129,9 +127,8 @@ public class News {
 
 	@Override
 	public String toString() {
-		return "News [id=" + id + ", title=" + title + ", newsBody=" + newsBody + ", image=" + Arrays.toString(image)
-				+ ", categories=" + categories + ", lastUpdatedDate=" + lastUpdatedDate + ", createdDate=" + createdDate
-				+ "]";
+		return "News [id=" + news_id + ", title=" + title + ", newsBody=" + newsBody + ", categories=" + categories
+				+ ", lastUpdatedDate=" + lastUpdatedDate + ", createdDate=" + createdDate + "]";
 	}
 
 }

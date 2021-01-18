@@ -2,10 +2,10 @@ package com.ishwor.newp.spring.boot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-@ComponentScan("com.ishwor.newp.spring.boot.*")
+@EnableJpaAuditing
 public class NewspSpringBootApplication {
 
 	public static void main(String[] args) {
@@ -13,3 +13,4 @@ public class NewspSpringBootApplication {
 	}
 
 }
+
