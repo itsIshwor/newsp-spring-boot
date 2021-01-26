@@ -29,7 +29,9 @@
 						</c:forEach>
 					</form:select>
 				</div>
-
+				
+				
+	
 				<div class="form-group">
 					<label for="file">Photo</label> <input type="file" name="file"
 						class="form-control" id="file" multiple />

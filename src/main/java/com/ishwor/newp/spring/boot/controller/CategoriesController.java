@@ -2,9 +2,6 @@ package com.ishwor.newp.spring.boot.controller;
 
 import java.util.List;
 
-import com.ishwor.newp.spring.boot.service.categories.CategoriesServiceImpl;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.ishwor.newp.spring.boot.comon.util.GlobalCategoriesModule;
 import com.ishwor.newp.spring.boot.domain.Categories;
+import com.ishwor.newp.spring.boot.service.categories.CategoriesServiceImpl;
 
 
 @Controller()
 public class CategoriesController {
-
-	private static final Logger log = LogManager.getLogger(CategoriesController.class);
 
 	@Autowired
 	CategoriesServiceImpl categoriesServiceImpl;
@@ -36,8 +32,7 @@ public class CategoriesController {
 		List<Categories> listAll = categoriesServiceImpl.findAllCategories();
 
 		model.addAttribute("listAll", listAll.toArray());
-		log.info("List of All Available Categories====>\n {}", listAll);
-
+		
 		return "/categories/list-categories";
 	}
 
@@ -63,7 +58,7 @@ public class CategoriesController {
 		model.addAttribute("title", "update categories-" + id);
 
 		Categories categories = categoriesServiceImpl.findBycategoriesId(id);
-		log.info(categories);
+		
 		model.addAttribute("categories", categories);
 		return "/categories/update-categories";
 	}

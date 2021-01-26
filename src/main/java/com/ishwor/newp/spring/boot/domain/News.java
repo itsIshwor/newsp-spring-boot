@@ -43,14 +43,15 @@ public class News {
 	@JoinColumn(name = "categories_id", referencedColumnName = "cId")
 	private Categories categories;
 
+	private String [] docLocation;
+	
+	
 	@UpdateTimestamp
 	private LocalDateTime lastUpdatedDate;
 
 	@CreationTimestamp
 	@Column(updatable = false)
 	private LocalDateTime createdDate;
-
-	
 
 	public Integer getNews_id() {
 		return news_id;
@@ -59,8 +60,6 @@ public class News {
 	public void setNews_id(Integer news_id) {
 		this.news_id = news_id;
 	}
-
-	
 
 	public News() {
 
@@ -114,6 +113,20 @@ public class News {
 		this.news_id = id;
 	}
 
+	/*
+	 * public boolean isFlash() { return isFlash; }
+	 * 
+	 * public void setFlash(boolean isFlash) { this.isFlash = isFlash; }
+	 */
+
+	public String[] getDocLocation() {
+		return docLocation;
+	}
+
+	public void setDocLocation(String[] docLocation) {
+		this.docLocation = docLocation;
+	}
+
 	public News(Integer id,
 			@NotNull(message = "title can't be null") @NotEmpty(message = "title can't be empty.") String title,
 			String newsBody, Categories categories, LocalDateTime lastUpdatedDate, LocalDateTime createdDate) {
@@ -124,6 +137,12 @@ public class News {
 		this.lastUpdatedDate = lastUpdatedDate;
 		this.createdDate = createdDate;
 	}
+
+	/*
+	 * public Doc getDoc() { return doc; }
+	 * 
+	 * public void setDoc(Doc doc) { this.doc = doc; }
+	 */
 
 	@Override
 	public String toString() {

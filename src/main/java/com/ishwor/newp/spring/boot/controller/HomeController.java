@@ -29,9 +29,6 @@ public class HomeController implements ErrorController {
 	@Autowired
 	NewsServiceImpl newServiceImpl;
 
-	@Autowired
-	NewsController newsController;
-
 	@GetMapping("/")
 	public String home(Model model, @ModelAttribute("subs") Subscription subs,
 			@RequestParam(name = "page", defaultValue = "1") Integer pageNo) {
@@ -44,12 +41,11 @@ public class HomeController implements ErrorController {
 		List<News> allNews = page.getContent();
 		// get all news and all it to the view
 		model.addAttribute("allNews", allNews);
-		
+
 		model.addAttribute("totalElement", page.getTotalElements());
 		model.addAttribute("totalPages", page.getTotalPages());
 		model.addAttribute("currentPage", pageNo);
-		
-		
+
 		return "index";
 	}
 

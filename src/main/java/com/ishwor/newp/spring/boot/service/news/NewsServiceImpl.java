@@ -21,7 +21,9 @@ public class NewsServiceImpl {
 	@Autowired
 	NewsRepo newsRepo;
 
+
 	public Page<News> findAllNews(Integer pageNo, Integer pageSize) {
+
 		Pageable paging = PageRequest.of(pageNo - 1, pageSize);
 
 		Page<News> listOfNewsInPage = newsRepo.findAll(paging);
@@ -39,9 +41,9 @@ public class NewsServiceImpl {
 			throw new DataNotFoundExeption("No news can find with given id::" + id);
 	}
 
-	public void saveNews(News news) throws DataNotFoundExeption {
+	public News saveNews(News news) throws DataNotFoundExeption {
 		if (news.getId() == null)
-			newsRepo.save(news);
+			return newsRepo.save(news);
 
 		Optional<News> isNewsPresent = newsRepo.findById(news.getId());
 		if (isNewsPresent.isPresent()) {
@@ -49,10 +51,11 @@ public class NewsServiceImpl {
 			newsToUpdate.setCategories(news.getCategories());
 			newsToUpdate.setNewsBody(news.getNewsBody());
 			newsToUpdate.setTitle(news.getTitle());
-
+			newsToUpdate.setDocLocation(news.getDocLocation());
 			newsToUpdate = newsRepo.save(newsToUpdate);
-
+			return newsToUpdate;
 		}
+		return null;
 	}
 
 	public void deleteNews(Integer id) throws DataNotFoundExeption {

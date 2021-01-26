@@ -15,6 +15,7 @@
 						<th>CId</th>
 						<th>Create At</th>
 						<th>Update At</th>
+						<th>Images</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -28,10 +29,15 @@
 							<td>${news.categories.cId}</td>
 							<td>${news.createdDate}</td>
 							<td>${news.lastUpdatedDate}</td>
+							<td><c:forEach var="img" items="${news.docLocation}">
+									<img src="/resources/doc-dir/${news.id}/${img}" height="40px"
+										width="40px" alt="${img}" />
+								</c:forEach></td>
 							<td><a class="btn btn-primary btn-sm d-inline-block"
-								href="/news/update/${news.id}"><i class="  fas fa-edit"></i></a> <a
-								class="btn btn-danger btn-sm d-inline-block" href="/news/delete/${news.id}"><i
-									class="fas fa-trash"></i></a> <a class="btn btn-success btn-sm d-inline-block"
+								href="/news/update/${news.id}"><i class="  fas fa-edit"></i></a>
+								<a class="btn btn-danger btn-sm d-inline-block"
+								href="/news/delete/${news.id}"><i class="fas fa-trash"></i></a>
+								<a class="btn btn-success btn-sm d-inline-block"
 								href="/news/view/${news.id}"><i class="fas fa-eye"></i></a></td>
 						</tr>
 					</c:forEach>
@@ -45,36 +51,34 @@
 			<c:if test="${totalPages >1}">
 				<nav aria-label="Page navigation example">
 					<ul class="pagination">
-						<li class="page-item">
-							<a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						<li class="page-item"><a class="page-link" href="#"
+							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 								<span class="sr-only">Previous</span>
-							</a>
-						</li>
-						
+						</a></li>
+
 						<c:forEach begin="1" end="${totalPages}" var="i">
-                			<c:choose>
-                    			<c:when test="${currentPage eq i}">
-                    				<li class="page-item">
-                    					<a href="${pageContext.request.contextPath}/news/list?page=${currentPage}" class="page-link">${i}</a>
-                    				</li>
-                        			
-                    			</c:when>
-                   			 <c:otherwise>
-                   			 	<li class="page-item">
-                   			 		<a href="${pageContext.request.contextPath}/news/list?page=${i}" class="page-link">${i}</a>	
-                   			 	</li>
-                        		
-                    			</c:otherwise>
-                			</c:choose>
-            			</c:forEach>
-						
-						
-						<li class="page-item">
-							<a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&raquo;</span>
+							<c:choose>
+								<c:when test="${currentPage eq i}">
+									<li class="page-item"><a
+										href="${pageContext.request.contextPath}/news/list?page=${currentPage}"
+										class="page-link">${i}</a></li>
+
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a
+										href="${pageContext.request.contextPath}/news/list?page=${i}"
+										class="page-link">${i}</a></li>
+
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+
+
+						<li class="page-item"><a class="page-link" href="#"
+							aria-label="Previous"> <span aria-hidden="true">&raquo;</span>
 								<span class="sr-only">Previous</span>
-							</a>
-						</li>
-						
+						</a></li>
+
 					</ul>
 				</nav>
 			</c:if>
@@ -82,10 +86,10 @@
 
 	</div>
 	<div class="row mx-auto">
-		<p class=" btn btn-primary d-inline-block mr-4">Total News: ${totalElement}</p>
+		<p class=" btn btn-primary d-inline-block mr-4">Total News:
+			${totalElement}</p>
 		<p class=" btn btn-primary">Total Page: ${totalPages}</p>
-		<p class=" btn btn-primary mx-4">Current Page:  ${currentPage}</p>
+		<p class=" btn btn-primary mx-4">Current Page: ${currentPage}</p>
 	</div>
 </div>
-
 <jsp:include page="../includes/footer.jsp"></jsp:include>
