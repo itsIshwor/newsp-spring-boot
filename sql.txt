@@ -1,0 +1,11 @@
+for test add following:
+
+insert into users(user_id,enabled,password,username)
+values(1,1,'$2y$12$OJyLsbSBWtoW73o9nhbfne/rWoKcuudRtd7nKMskpIe5l1EmlR7mG','iupreti');
+
+
+insert into role(id,name)values(1,"ADM");
+insert into role(id,name)values(2,"EMP");
+insert into role(id,name)values(3,"MGR");
+
+insert into users_roles(user_id,role_id) values(,);

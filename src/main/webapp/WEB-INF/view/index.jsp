@@ -16,7 +16,7 @@
 							<h4 class="card-title">${OneNews.title}</h4>
 							<div>
 								<c:forEach var="img" items="${OneNews.docLocation}">
-									<img src="/resources/doc-dir/${OneNews.id}/${img}" class="img-responsive" alt="${img}" />
+									<img src="/resources/doc-dir/${OneNews.id}/${img}" class="img-responsive img-fluid" alt="${img}" />
 								</c:forEach>
 							</div>
 							

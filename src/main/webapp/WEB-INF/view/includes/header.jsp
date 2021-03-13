@@ -9,4 +9,4 @@
 	<link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="navigation.jsp"></jsp:include>
+<jsp:include page="navigation.jsp"/>

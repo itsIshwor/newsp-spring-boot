@@ -19,6 +19,9 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * @author iupreti
  */
@@ -26,23 +29,29 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Entity
 @NamedQueries(value = { @NamedQuery(name = "findAllNews", query = "Select n from News n"),
 		@NamedQuery(name = "findAllNewsDesc", query = "Select n from News n order by id desc") })
+@ApiModel(description = "The news bean and model class")
 public class News {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(notes = "news id primary key")
 	private Integer news_id;
 
 	@NotNull(message = "title can't be null")
 	@NotEmpty(message = "title can't be empty.")
+	@ApiModelProperty(notes = "News title")
 	private String title;
 
 	@Lob
+	@ApiModelProperty(notes = "news body of type Large object")
 	private String newsBody;
 
 	@OneToOne(targetEntity = Categories.class, cascade = CascadeType.DETACH)
 	@JoinColumn(name = "categories_id", referencedColumnName = "cId")
+	@ApiModelProperty(notes = "category for news, news can have one category per news")
 	private Categories categories;
 
+	@ApiModelProperty(notes = "its actual path(s) for photo stored along with news")
 	private String [] docLocation;
 	
 	

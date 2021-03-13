@@ -1,4 +1,4 @@
-package com.ishwor.newp.spring.boot.controller;
+package com.ishwor.newp.spring.boot.controller.simple;
 
 import javax.validation.Valid;
 

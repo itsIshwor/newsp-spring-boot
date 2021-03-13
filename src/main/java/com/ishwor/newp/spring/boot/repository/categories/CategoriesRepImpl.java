@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ishwor.newp.spring.boot.comon.util.AOP.TrackQueryTime;
 import com.ishwor.newp.spring.boot.domain.Categories;
 
 @Repository
@@ -17,7 +18,7 @@ public class CategoriesRepImpl implements CategoriesRepository {
 	EntityManager sessionFactory;
 
 	@Override
-
+	@TrackQueryTime
 	public List<Categories> findAllCategories() {
 		Session session = sessionFactory.unwrap(Session.class);
 	
